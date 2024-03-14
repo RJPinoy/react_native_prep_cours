@@ -67,40 +67,30 @@ const CameraComponent = () => {
     return (
         <View style={styles.container}>
             {!image ?
-                <Camera type={type} ref={cameraRef}>
+                <>
+                    <Camera type={type} ref={cameraRef}>
+                        <View>
+                            <TouchableOpacity onPress={toggleCameraType}>
+                                <Text>Flip camera</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Camera>
+                    
                     <View>
-                        <TouchableOpacity onPress={toggleCameraType}>
-                            <Text>Flip camera</Text>
-                        </TouchableOpacity>
+                        <BtnCameraComponent title="Flash on" icon={"flash"} onPress={toggleFlash} color={"#000"} />
+                        <BtnCameraComponent title="Take a picture" icon={"camera"} onPress={takePicture} color={"#000"} />
+                        <BtnCameraComponent title="Change camera" icon={"cycle"} onPress={toggleCameraType} color={"#000"} />
                     </View>
-                </Camera>
+                </>
                 :
-                <Image source={{ uri: image}} />
+                <>
+                    <Image source={{ uri: image }} />
+                    <View>
+                        <Button title="Take a picture" icon={"retweet"} onPress={() => setImage(null)} color={"#000"} />
+                        <Button title="Save the picture" icon={"check"} onPress={savePicture} color={"#000"} />
+                    </View>
+                </>
             }
-            {image ?
-                <View>
-                    <Button title="Take a picture" icon={"retweet"} onPress={() => setImage(null)} color={"#fff"} />
-                    <Button title="Save the picture" icon={"check"} onPress={savePicture} color={"#fff"} />
-                </View>
-                :
-                <View>
-                    <BtnCameraComponent title="Flash on" icon={"flash"} onPress={toggleFlash} color={"#fff"} />
-                    <BtnCameraComponent title="Take a picture" icon={"camera"} onPress={takePicture} color={"#fff"} />
-                    <BtnCameraComponent title="Change camera" icon={"cycle"} onPress={toggleCameraType} color={"#fff"} />
-                </View>
-            }
-            {/* <Camera type={type}>
-                <View>
-                    <TouchableOpacity onPress={toggleCameraType}>
-                        <Text>Flip camera</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-                    <BtnCameraComponent title="Flash on" icon={"flash"} onPress={toggleFlash} color={"#fff"} />
-                    <BtnCameraComponent title="Take a picture" icon={"camera"} onPress={takePicture} color={"#fff"} />
-                    <BtnCameraComponent title="Change camera" icon={"cycle"} onPress={toggleCameraType} color={"#fff"} />
-                </View>
-            </Camera> */}
         </View>
     );
 }

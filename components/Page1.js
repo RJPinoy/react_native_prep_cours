@@ -16,6 +16,10 @@ export default function Page1({ navigation }) {
           navigation.navigate('CameraComponent');
           console.log('clicked on :', key);
           break;
+      case 'Go to Contact':
+          navigation.navigate('Contact');
+          console.log('clicked on :', key);
+          break;
       default:
         break;
     }
@@ -31,6 +35,7 @@ export default function Page1({ navigation }) {
           {key: 'Go to exercice 1' },
           {key: 'Go to exercice 2' },
           {key: 'Go to CameraComponent' },
+          {key: 'Go to Contact' },
         ]}
         renderItem={({item}) => 
           <Text 

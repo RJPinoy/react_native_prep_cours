@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, TextInput } from 'react-native';
 import { useState } from 'react';
 
 let nextId = 0;
@@ -27,17 +27,18 @@ export default function Exercice1({ navigation }) {
         <View style={styles.container}>
             <Text style={styles.titleText}>Exercice 1!</Text>
 
-            <h1>Add text to list:</h1>
+            <Text>Add text to list:</Text>
 
-            <input value={text} onChange={e => setText(e.target.value)}/>
+            <TextInput value={text} onChange={e => setText(e.target.value)} />
 
-            <button onClick={() => {setList( [...lists, { id: nextId++, text: text }] )}}>Add</button>
+            <Button title="Add" onPress={() => {setList( [...lists, { id: nextId++, text: text }] )}} />
 
-            <ul>
-                {lists.map(list => (
-                    <li key={list.id}>{list.text}</li>
-                ))}
-            </ul>
+            <FlatList
+                data={lists.map(list => ({ key: list.id, text: list.text }))}
+                renderItem={({ item }) => (
+                    <Text>{item.text}</Text>
+                )}
+            />
 
             <StatusBar style="auto" />
             <Button title="Navigate to page2 screen" onPress={() => navigation.navigate('Page2')} />
